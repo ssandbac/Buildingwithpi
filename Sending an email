@@ -1,0 +1,47 @@
+#create python script
+sudo nano emailip.py
+
+#write in emailip.py
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+print(s.getsockname()[0])
+x = s.getsockname()[0]
+s.close()
+
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+
+fromaddr = "raspireed@gmail.com"
+toaddr = "ssandbac@bates.edu"
+msg = MIMEMultipart()
+msg['From'] = fromaddr
+msg['To'] = toaddr
+msg['Subject'] = "IP Address"
+
+body = x
+msg.attach(MIMEText(body, 'plain'))
+
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(fromaddr, "thebomb")
+text = msg.as_string()
+server.sendmail(fromaddr, toaddr, text)
+server.quit()
+
+#then this does it on reboot
+sudo nano /etc/rc.local
+
+#enter in /etc/rc.local
+while ! /sbin/ifconfig wlan0 | grep -q 'inet addr:[0-9]'; do
+    sleep 3
+done
+IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+  python /home/pi/test/emailip.py
+fi
+
+exit 0
+#and you're done
