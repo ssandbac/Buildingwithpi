@@ -3,12 +3,18 @@ mkdir test
 #go to test folder
 cd test/
 #in test folder
-#in print.py
+nano print.py
+#in print.py, type
 import time
 date = time.strftime("%d/%m/%Y")
 time = time.strftime("%I:%M:%S")
 f = open('/home/pi/test/datetime.txt','a')
 f.write(date+" "+time+"\n")
 f.close()
-#still need to figure how to set up the shell script
+#exit out of print.py
+#in test/
+sudo crontab -e
+#brings up crontab
+*/1 * * * * python /home/pi/test/print.py
+
 
