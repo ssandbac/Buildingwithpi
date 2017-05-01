@@ -25,7 +25,7 @@ msg.attach(MIMEText(body, 'plain'))
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(fromaddr, "thebomb")
+server.login(fromaddr, "RASPberrypi")
 text = msg.as_string()
 server.sendmail(fromaddr, toaddr, text)
 server.quit()
@@ -40,7 +40,7 @@ done
 IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
-  python /home/pi/test/emailip.py
+  python /home/pi/Background/emailip.py &
 fi
 
 exit 0
