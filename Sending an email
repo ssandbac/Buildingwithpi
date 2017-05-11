@@ -37,7 +37,7 @@ sudo nano /etc/rc.local
 while ! /sbin/ifconfig wlan0 | grep -q 'inet addr:[0-9]'; do
     sleep 3
 done
-IP=$(hostname -I) || true
+_IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
   python /home/pi/Background/emailip.py &
