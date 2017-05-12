@@ -1,0 +1,3 @@
+sudo apt-get autoremove libopencv-dev python-opencv
+#install opencv
+sudo apt-get install libopencv-dev
