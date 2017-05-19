@@ -17,8 +17,23 @@ body = "Video of Motion Detected"
 
 msg.attach(MIMEText(body, 'plain'))
 
-filename = "NAME OF THE FILE WITH ITS EXTENSION"
-attachment = open("PATH OF THE FILE", "rb")
+import os
+
+rootpath = '/var/lib/motion'
+filelist = [os.path.join(rootpath, f) for f in os.listdir(rootpath)]
+filelist = [f for f in filelist if os.path.isfile(f)]
+newest = max(filelist, key=lambda x: os.stat(x).st_mtime)
+
+filename = newest
+
+import os
+
+rootpath = '/var/lib/motion'
+filelist = [os.path.join(rootpath, f) for f in os.listdir(rootpath)]
+filelist = [f for f in filelist if os.path.isfile(f)]
+newest = max(filelist, key=lambda x: os.stat(x).st_mtime)
+
+attachment = open(newest, "rb")
 
 part = MIMEBase('application', 'octet-stream')
 part.set_payload((attachment).read())
