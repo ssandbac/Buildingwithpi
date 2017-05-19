@@ -1,0 +1,7 @@
+import os
+
+rootpath = '/var/lib/motion'
+filelist = [os.path.join(rootpath, f) for f in os.listdir(rootpath)]
+filelist = [f for f in filelist if os.path.isfile(f)]
+newest = max(filelist, key=lambda x: os.stat(x).st_mtime)
+print  newest
