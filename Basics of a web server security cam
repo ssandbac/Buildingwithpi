@@ -33,8 +33,9 @@ height 480 #This changes the height of the image displayed
 ##################
 #emailing video settings in .../motion.conf
 
-on_movie_end python /home/pi/background/motionvid.py %f #DELETE THE " ; "
-
+#DELETE THE " ; " infront of the line, the semicolon comments the line out
+on_event_start python /home/pi/background/motionalert.py %f
+on_movie_end python /home/pi/background/motionvid.py %f 
 ##################
 
 
