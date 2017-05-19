@@ -1,3 +1,9 @@
+#start in home directory
+cd ~
+
+#create background folder
+mkdir background
+
 #create python script
 sudo nano emailip.py
 
@@ -13,8 +19,8 @@ import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
-fromaddr = "raspireed@gmail.com"
-toaddr = "ssandbac@bates.edu"
+fromaddr = "YOURADDRESS"
+toaddr = "RECIEVINGADDRESS"
 msg = MIMEMultipart()
 msg['From'] = fromaddr
 msg['To'] = toaddr
@@ -25,7 +31,7 @@ msg.attach(MIMEText(body, 'plain'))
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(fromaddr, "RASPberrypi")
+server.login(fromaddr, "YOURPASSWORD")
 text = msg.as_string()
 server.sendmail(fromaddr, toaddr, text)
 server.quit()
